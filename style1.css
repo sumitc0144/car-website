@@ -1,0 +1,149 @@
+
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+/* The Main Container*/
+
+.banner{
+    width: 100%;
+    height: 100vh;/*-  viewport height*/
+    text-align: center;
+    overflow: hidden;/*- Prevents any child elements from spilling outside the banner.*/
+    position: relative;/*- positioning context for absolutely positioned child*/
+}
+/* #d rotating container */
+.banner .slider{
+    position: absolute;
+	/*sets the slider size */
+	
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+	
+    transform-style: preserve-3d;/*- Enables 3D transformations for child elements (.item), so they can rotate and appear in depth.*/
+    transform: perspective(1000px);/*- Adds a 3D perspective to the container*/
+    animation: autoRun 40s linear infinite;/*applies a smoth continuous roatation for 40 secs , looping infinitly*/
+    z-index: 2;/*- Ensures the slider appears above other elements, like background images or text.*/
+}
+/*roatationlogic */
+@keyframes autoRun{
+	/*- rotateY(360deg): Spins the slider horizontally in a full circle.
+      - rotateX(-16deg): Adds a slight vertical tilt for a more dynamic 3D look.*/
+    from{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);/*start from 0 deg*/
+    }to{
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);/* end to 360 deg*/
+    }
+}
+/*This targets each .item inside a .slider within a .banner.*/
+.banner .slider .item{
+    position: absolute;
+    inset: 0 0 0 0;/*sets the elemnt*/
+	/*- Rotates the element around the Y-axis (vertical axis), creating a horizontal spinning effect*/
+    
+	transform: 
+        rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px);
+}
+.banner .slider .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/*The container for banner content*/
+.banner .content{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);/*for centering the element*/
+    width: min(1400px, 100vw);/*- Max width is 1400px. If the viewport is smaller, it shrinks to fit (100vw = 100% of viewport width).*/
+    height: max-content;
+    padding-bottom: 100px;
+	/*flexbox layou,it easier to arrange elements in a containert*/
+    display: flex;/*acitvates flexbox*/
+    flex-wrap: wrap;/*Allows items to wrap onto multiple lines*/
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;/*Ensures this content appears above background elements*/
+}
+.banner .content h1{
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+.banner .content h1::after{
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+	/*- Adds a 2px outline around the text using a light gray color. This is a WebKit-specific property (works in Chrome, Safari).*/
+    color: transparent;
+}
+.banner .content .author{
+    font-family: Poppins;
+    text-align: right;
+    max-width: 200px;
+}
+.banner .content h2{
+    font-size: 3em;
+}
+.banner .content .model{
+    background-image: url(model.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;/*Scales the image to 130% of the element’s height, while keeping its original width*/
+    background-repeat: no-repeat;/*Prevents the image from repeating*/
+    background-position: top center;
+    z-index: 1;/*- Places this element behind others with higher z-index values*/
+}
+@media screen and (max-width: 1023px) {
+    .banner .slider{
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+    .banner .slider .item{
+        transform: 
+            rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(300px);
+    }
+    
+    .banner .content h1{
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+    .banner .content .author{
+        color: #fff;
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .banner .slider{
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
+    .banner .slider .item{
+        transform: 
+            rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(180px);
+    }
+    .banner .content h1{
+        font-size: 5em;
+    }
+}

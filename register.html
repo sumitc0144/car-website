@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+    <style>
+        body { font-family: Arial; background: #f2f2f2; }
+        .form-box {
+            width: 400px; margin: 100px auto; padding: 20px;
+            background: white; border-radius: 8px; box-shadow: 0 0 10px gray;
+        }
+        input { width: 100%; padding: 10px; margin: 5px 0; }
+        button { width: 100%; padding: 10px; background: blue; color: white; border: none; cursor: pointer; }
+        button:hover { background: darkblue; }
+    </style>
+</head>
+<body><center>
+    <div class="form-box">
+        <h2>Register</h2>
+        <form action="register.php" method="GET" >
+            <input type="text" name="username" placeholder="Enter Username" >
+            <input type="password" name="password" placeholder="Enter Password" >
+            <button type="submit">Register</button>
+        </form>
+        <p>Already registered? <a href="login.html">Login here</a></p>
+    </div>
+</center>
+</body>
+</html>

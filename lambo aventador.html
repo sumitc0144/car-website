@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Luxury Coupe – Model Overview</title>
+  <style>
+    /* --------------------
+      Base & Tokens
+    -------------------- */
+    :root{
+      --bg:#0b0b0c;
+      --surface:#111215;
+      --surface-2:#1a1b1f;
+      --text:#e8e8ea;
+      --muted:#b7b7c0;
+      --accent:#b39b6b; /* warm gold */
+      --accent-2:#7ec8ff; /* highlight blue */
+      --border:rgba(255,255,255,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1200px;
+    }
+.controls {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    .circle-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: none;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+    }
+    #startBtn {
+      background: #28a745;
+    }
+   
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+            color:var(--text);
+      background:var(--bg);
+      letter-spacing:.2px;
+    }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+
+    /*------
+      Hero
+    -------------------- */
+    .hero{position:relative;min-height:72vh;display:grid;place-items:end center;}
+    .hero-media{position:absolute;inset:0;}
+    .hero-media .bg{
+      width:100%;height:100%;object-fit:cover;object-position:center;
+     
+    }
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,6,8,.55) 0%, rgba(5,6,8,1) 100%)}
+    .hero-inner{position:relative;z-index:1;max-width:var(--max);width:100%;padding:40px 20px;}
+
+    
+    .title-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+    .h-title{font-size:clamp(28px, 6vw, 56px);font-weight:700;letter-spacing:.02em}
+    .subtitle{text-align:left;font-size:clamp(14px, 2.2vw, 18px)}
+
+      .btn{padding:12px 18px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,#202228,#17181d);cursor:pointer}
+    .btn.primary{border-color:transparent;background:linear-gradient(180deg,#cdb37f,#a08653);color:#161616;font-weight:600}
+    .btn.ghost{background:transparent}
+
+    /* --------------------
+      Tabs (CSS-only)
+    -------------------- */
+    .tabs{max-width:var(--max);margin:24px auto 0;padding:0 20px}
+    .tab-bar{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+    .tab-bar label{padding:12px 14px;border-radius:12px 12px 0 0;color:var(--muted);cursor:pointer}
+    .tab-bar label:hover{color:var(--text)}
+
+    input[name="tab"]{position:absolute;left:-9999px}
+    .tab-content{display:none;padding:26px 0}
+    #tab-overview:checked ~ .tabs .tab-bar label[for="tab-overview"],
+    #tab-design:checked   ~ .tabs .tab-bar label[for="tab-design"],
+    #tab-performance:checked ~ .tabs .tab-bar label[for="tab-performance"],
+    #tab-specs:checked ~ .tabs .tab-bar label[for="tab-specs"]{
+      color:var(--text);
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-bottom-color:transparent;
+    }
+    #tab-overview:checked ~ .tabs #panel-overview,
+    #tab-design:checked ~ .tabs #panel-design,
+    #tab-performance:checked ~ .tabs #panel-performance,
+    #tab-specs:checked ~ .tabs #panel-specs{display:block}
+
+    /* --------------------
+      Overview Panel
+    -------------------- */
+    .highlight-grid{display:grid;grid-template-columns:repeat(12,1fr);;gap:16px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card-hero{grid-column:1/-1;position:relative;overflow:hidden}
+        .card-hero .caption{position:absolute;bottom:18px;left:18px;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);padding:10px 14px;border-radius:12px;border:1px solid var(--border)}
+
+
+    .metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px}
+    .metric h3{font-size:28px;margin:4px 0}
+    .metric p{color:var(--muted);font-size:.95rem}
+
+                
+    /* --------------------
+      Design Panel
+    -------------------- */
+    .design-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .design-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .design-card img{height:180px;width:100%;object-fit:cover}
+    .design-card .body{padding:16px}
+   /*   Performance Panel
+    -------------------- */
+    .perf-wrap{display:grid;grid-template-columns:1fr;gap:16px}
+    .spec-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:900px){.spec-row{grid-template-columns:repeat(2,1fr)}}
+    .spec{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px}
+    .spec .k{color:var(--muted);font-size:.85rem}
+    .spec .v{font-size:22px;margin-top:6px}
+
+    /* --------------------
+      Specs Table
+    -------------------- */
+    .specs-table{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    table{width:100%;border-collapse:collapse;background:var(--surface)}
+    th,td{padding:14px 16px;border-bottom:1px solid var(--border)}
+    th{text-align:left;color:var(--muted);font-weight:500;background:linear-gradient(180deg,#17181c,#14151a)}
+    tr:hover td{background:rgba(255,255,255,.02)}
+
+        /* --------------------
+      Footer
+    -------------------- */
+    footer{margin-top:50px;border-top:1px;background:black}
+    .foot{max-width:50%;text-align:left;margin:0 auto;padding:28px 20px;color:var(--muted);display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:20px}
+    .foot small{opacity:.8}
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media">
+      <img class="bg" src="lamb.jpg" alt="Coupe at dusk"/>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="breadcrumbs">
+        <a href="car.html">Home</a>
+      
+             </div>
+
+      <div class="title-wrap">
+     
+          <h1 class="h-title">AVENTADORS</h1>
+          <p class="subtitle">DARE YOUR EGO</p>
+      
+                 </div>
+  </section>
+
+  <!-- CSS-only Tabs toggles -->
+  <input type="radio" id="tab-overview"   name="tab" checked>
+  <input type="radio" id="tab-design"     name="tab">
+  <input type="radio" id="tab-performance"name="tab">
+  <input type="radio" id="tab-specs"      name="tab">
+
+  <section class="tabs">
+    <div class="tab-bar">
+      <label for="tab-overview">Overview</label>
+      <label for="tab-design">Design</label>
+      <label for="tab-performance">Performance</label>
+      <label for="tab-specs">Technical data</label>
+    </div>
+
+    <!-- Overview Panel -->
+    <div id="panel-overview" class="tab-content">
+      <div class="highlight-grid">
+        <article class="card card-hero">
+          <img src="lambf.jpg" alt="Front 3/4 view">
+                  </article>
+
+        <div class="metrics">
+          <div class="metric">
+            <p>0–100 km/h</p>
+            <h3>~2.8 s</h3>
+            <p>Launch Control active</p>
+          </div>
+          <div class="metric">
+            <p>Top speed</p>
+            <h3> 350 km/h</h3>
+            <p>Electronically limited</p>
+          </div>
+          <div class="metric">
+            <p>Power</p>
+            <h3>566 kW(770)</h3>
+            <p>6.5L v12</p>
+          </div>
+          <div class="metric">
+            <p>Drive</p>
+            <h3>Permanent AWD</h3>
+          </div>
+        </div>
+
+        
+                        </div>
+    </div>
+
+    <!-- Design Panel -->
+    <div id="panel-design" class="tab-content">
+      <div class="design-grid">
+        <article class="design-card">
+          <img src="lamboex.jpg" alt="Exterior details"/>
+          <div class="body">
+            <h4>Exterior package</h4>
+            <p>Ultra-lightweight materials developed for maximum performance give rise to breathtaking design. Enhanced aerodynamic profiles, a fully redesigned front end, larger side skirts, the omega-shaped rear wing and lighter, and higher exhaust outlets are incorporated into the feather-light carbon-fiber chassis. 
+</p>
+          </div>
+        </article>
+        <article class="design-card">
+          <img src="lamboin.jpg" alt="Interior details"/>
+          <div class="body">
+            <h4>Interior package</h4>
+            <p>The technological look of carbon fiber, featured in the monocoque as well as the doors, seats, center tunnel and console, coexists with a design of clear aeronautical inspiration, while the leather and Alcantara upholstery adds a bold touch to the luxurious interior. 
+But it is the refined details of the cross-stitching and special SVJ plaque that confer a truly unique character to this remarkable engineering gem.
+ </p>
+          </div>
+        </article>
+             </div>
+    </div>
+
+    <!-- Performance Panel -->
+    <div id="panel-performance" class="tab-content">
+      <div class="perf-wrap">
+        <div class="spec-row">
+          <div class="spec"><div class="k">Engine</div><div class="v">Naturally aspirated 6.5 L (6,498 cc) V12, 60° configuration
+</div></div>
+          <div class="spec"><div class="k">Displacement</div><div class="v">6.5 L (for the V12 engine) </div></div>
+          <div class="spec"><div class="k">Max output</div><div class="v">730 hp (544kw)
+
+</div></div>
+          <div class="spec"><div class="k">Max torque</div><div class="v">690 Nm</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec"><div class="k">Transmission</div><div class="v">7-speed Independent Shifting Rod (ISR) automated manual gearbox</div></div>
+          <div class="spec"><div class="k">Drive</div><div class="v">All-wheel drive (AWD)</div></div>
+          <div class="spec"><div class="k">0–100 km/h</div><div class="v">2.8 s </div></div>
+          <div class="spec"><div class="k">Top speed</div><div class="v">~350 km/h (217 mph)
+h</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical data Panel -->
+    <div id="panel-specs" class="tab-content">
+      <div class="specs-table">
+        <table>
+          <thead><!--not neccesarry-->
+            <tr>
+              <th>Category</th>
+              <th>Item</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dimensions</td>
+              <td>Length x Width x Height</td>
+              <td>~4728 × 1984 × 1136–1354 mm
+</td>
+            </tr>
+            <tr>
+              <td>Dimensions</td>
+              <td>Wheelbase</td>
+              <td>2700 mm</td>
+            </tr>
+            <tr>
+              <td>Weights</td>
+              <td>Curb weight</td>
+              <td>~1575–1970 kg</td>
+            </tr>
+            <tr>
+              <td>Tyres</td>
+              <td>Front / Rear</td>
+              <td>Front: 255/35 R19 (or 265/35 R20)
+
+Rear: 335/30 R20 (or 355/25 R21 )
+</td>
+            </tr>
+           <tr>
+              <td>Fuel</td>
+              <td>Tank capacity</td>
+              <td>85 liters </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <form action="p6.php" method="POST">
+<div class="controls">
+    <h2>Car Control Panel</h2>
+    <form method="post">
+      <label><input type="radio" name="action" value="engine" required> Start Engine</label>
+            <div>
+        <button type="submit" name="submit" value="start" id="startBtn" class="circle-btn">START</button>
+              </div>
+    </form>
+
+  </div>
+
+  </form>
+
+  <
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div>
+        <strong>Automotive</strong>
+        <p style="margin-top:10px;align-text:left;">Premium performance vehicles with grand touring comfort.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

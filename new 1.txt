@@ -1,0 +1,29 @@
+12891
+	12
+	aa
+	 z
+	 czv
+	 zsa
+	 vd
+	 czvscav
+	 
+	 <!DOCTYPE html>
+<html>
+<head><title>Append File Content</title></head>
+<body>
+  <h2>Append One File into Another</h2>
+  <form action="slip.php" method="post">
+    <label>First file name (source):</label><br>
+    <input type="text" name="file1"><br><br>
+
+    <label>Second file name (target):</label><br>
+    <input type="text" name="file2"><br><br>
+
+    <input type="submit" value="Append">
+  </form>
+</body>
+</html><form action="slip.php" method="post">
+  Source File: <input type="text" name="file1"><br>
+  Target File: <input type="text" name="file2"><br>
+  <input type="submit" value="Append">
+</form>

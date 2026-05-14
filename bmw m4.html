@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BMW M4 Competition – Model Overview</title>
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --surface:#111215;
+      --surface-2:#1a1b1f;
+      --text:#e8e8ea;
+      --muted:#b7b7c0;
+      --accent:#0f6ab4; /* BMW blue */
+      --accent-2:#ff0000; /* BMW M red */
+      --border:rgba(255,255,255,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius-sm:12px;
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg);
+      font-family:sans-serif;
+    }
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+    .hero{position:relative;min-height:72vh;display:grid;place-items:end center;}
+    .hero-media{position:absolute;inset:0;}
+    .hero-media .bg{width:100%;height:100%;object-fit:cover}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,6,8,.55) 0%, rgba(5,6,8,1) 100%)}
+    .hero-inner{position:relative;z-index:1;max-width:var(--max);width:100%;padding:40px 20px;}
+    .title-wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+    .h-title{font-size:clamp(28px, 6vw, 56px);font-weight:700;}
+    .subtitle{font-size:clamp(14px, 2.2vw, 18px)}
+
+    .tabs{max-width:var(--max);margin:24px auto 0;padding:0 20px}
+    .tab-bar{display:flex;gap:6px;border-bottom:1px solid var(--border)}
+    .tab-bar label{padding:12px 14px;border-radius:12px 12px 0 0;color:var(--muted);cursor:pointer}
+    .tab-bar label:hover{color:var(--text)}
+
+    input[name="tab"]{position:absolute;left:-9999px}
+    .tab-content{display:none;padding:26px 0}
+    #tab-overview:checked ~ .tabs .tab-bar label[for="tab-overview"],
+    #tab-design:checked   ~ .tabs .tab-bar label[for="tab-design"],
+    #tab-performance:checked ~ .tabs .tab-bar label[for="tab-performance"],
+    #tab-specs:checked ~ .tabs .tab-bar label[for="tab-specs"]{
+      color:var(--text);
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-bottom-color:transparent;
+    }
+    #tab-overview:checked ~ .tabs #panel-overview,
+    #tab-design:checked ~ .tabs #panel-design,
+    #tab-performance:checked ~ .tabs #panel-performance,
+    #tab-specs:checked ~ .tabs #panel-specs{display:block}
+
+    .highlight-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card-hero{grid-column:1/-1;position:relative;overflow:hidden}
+    .metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .metric{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px}
+    .metric h3{font-size:28px;margin:4px 0}
+    .metric p{color:var(--muted);font-size:.95rem}
+
+    .design-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .design-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .design-card img{height:180px;width:100%;object-fit:cover}
+    .design-card .body{padding:16px}
+
+    .perf-wrap{display:grid;gap:16px}
+    .spec-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:900px){.spec-row{grid-template-columns:repeat(2,1fr)}}
+    .spec{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px}
+    .spec .k{color:var(--muted);font-size:.85rem}
+    .spec .v{font-size:22px;margin-top:6px}
+
+    .specs-table{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    table{width:100%;border-collapse:collapse;background:var(--surface)}
+    th,td{padding:14px 16px;border-bottom:1px solid var(--border)}
+    th{text-align:left;color:var(--muted);font-weight:500;background:linear-gradient(180deg,#17181c,#14151a)}
+    tr:hover td{background:rgba(255,255,255,.02)}
+
+    footer{margin-top:50px;border-top:1px;background:black}
+    .foot{max-width:50%;text-align:left;margin:0 auto;padding:28px 20px;color:var(--muted)}
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media">
+      <img class="bg" src="bmw m4.jpg" alt="BMW M4 Competition"/>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-inner">
+ <a href="car.html">Home ></a>
+      <div class="title-wrap">
+
+      <div class="title-wrap">
+        <h1 class="h-title">BMW M4 COMPETITION</h1>
+        <p class="subtitle">POWER. PRECISION. PERFORMANCE.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <input type="radio" id="tab-overview"   name="tab" checked>
+  <input type="radio" id="tab-design"     name="tab">
+  <input type="radio" id="tab-performance"name="tab">
+  <input type="radio" id="tab-specs"      name="tab">
+
+  <section class="tabs">
+    <div class="tab-bar">
+      <label for="tab-overview">Overview</label>
+      <label for="tab-design">Design</label>
+      <label for="tab-performance">Performance</label>
+      <label for="tab-specs">Technical data</label>
+    </div>
+
+    <!-- Overview -->
+    <div id="panel-overview" class="tab-content">
+      <div class="highlight-grid">
+        <article class="card card-hero">
+          <img src="b.jpg" alt="BMW M4 Front view">
+        </article>
+        <div class="metrics">
+          <div class="metric">
+            <p>0–100 km/h</p>
+            <h3>3.9 s</h3>
+            <p>Launch Control</p>
+          </div>
+          <div class="metric">
+            <p>Top speed</p>
+            <h3>250 km/h</h3>
+            <p>(Electronically limited)</p>
+          </div>
+          <div class="metric">
+            <p>Power</p>
+            <h3>510 hp</h3>
+            <p>3.0L Twin-Turbo I6</p>
+          </div>
+          <div class="metric">
+            <p>Drive</p>
+            <h3>RWD / xDrive AWD</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div id="panel-design" class="tab-content">
+      <div class="design-grid">
+        <article class="design-card">
+          <img src="bmwf.jpg" alt="BMW M4 Exterior"/>
+          <div class="body">
+            <h4>Exterior</h4>
+            <p>Iconic kidney grille, aerodynamic lines, aggressive stance, and optional carbon-fiber roof — designed for performance and style.</p>
+          </div>
+        </article>
+        <article class="design-card">
+          <img src="bmw1in.jpg" alt="BMW M4 Interior"/>
+          <div class="body">
+            <h4>Interior</h4>
+            <p>Driver-focused cockpit, M sport seats, high-quality leather with contrast stitching, and advanced infotainment with BMW iDrive.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Performance -->
+    <div id="panel-performance" class="tab-content">
+      <div class="perf-wrap">
+        <div class="spec-row">
+          <div class="spec"><div class="k">Engine</div><div class="v">3.0L M TwinPower Turbo inline-6</div></div>
+          <div class="spec"><div class="k">Max output</div><div class="v">510 hp (375 kW)</div></div>
+          <div class="spec"><div class="k">Max torque</div><div class="v">650 Nm</div></div>
+          <div class="spec"><div class="k">Transmission</div><div class="v">8-speed M Steptronic automatic</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec"><div class="k">Drive</div><div class="v">Rear-wheel drive / BMW xDrive AWD</div></div>
+          <div class="spec"><div class="k">0–100 km/h</div><div class="v">3.9 s</div></div>
+          <div class="spec"><div class="k">Top speed</div><div class="v">250 km/h (305 km/h with M Driver’s Package)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specs -->
+    <div id="panel-specs" class="tab-content">
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Item</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dimensions</td><td>Length x Width x Height</td><td>4794 × 1887 × 1393 mm</td></tr>
+            <tr><td>Dimensions</td><td>Wheelbase</td><td>2857 mm</td></tr>
+            <tr><td>Weights</td><td>Curb weight</td><td>~1725 kg</td></tr>
+            <tr><td>Tyres</td><td>Front / Rear</td><td>Front: 275/35 R19<br>Rear: 285/30 R20</td></tr>
+            <tr><td>Fuel</td><td>Tank capacity</td><td>59 liters</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div>
+        <strong>BMW M</strong>
+        <p>Ultimate driving machines crafted with precision and performance in mind.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

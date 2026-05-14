@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bugatti Chiron – Model Overview</title>
+  <style>
+    :root{
+--bg:#0b0b0c;           /* Background color */
+--surface:#111215;      /* Card / panel background */
+--surface-2:#1a1b1f;    /* Secondary surface */
+--text:white;         /* Normal text */
+--border:rgba(255,255,255,.08); /* Border color */
+--radius:18px;          /* Rounded corners */
+
+    }
+/*backgroun and text color */
+body {
+  margin: 0;
+  color: white;       /* All text white */
+  background: black;
+  font-family: sans-serif;
+}
+/*imge in overview*/
+img {
+  max-width: 100%;
+  display: block;
+}
+/*for home */
+a {
+  color: white;       /* Links white */
+  text-decoration: none;/*removes deco..*/
+}
+
+/* ===== Hero Section ===== */
+/*==the big banner at the top==*/
+.hero {
+  position: relative;
+  min-height: 72vh;
+  display: grid;
+  place-items: end center;
+}
+/*==container for the background image==*/
+.hero-media {
+  position: absolute;
+  inset: 0;
+}
+/*==makes the image stretch to fill the whole banner==*/
+.hero-media .bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/*==overlay the texts and car ==*/
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,6,8,0.55), rgba(5,6,8,1));
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px 20px;
+}
+/*==right text==*/
+.title-wrap {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+  
+}
+.h-title {
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: bold;
+}
+.subtitle {
+  font-size: clamp(14px, 2.2vw, 18px);
+  color: white;   /* White */
+  
+}
+
+/* ===== Tabs ===== */
+/*==container for the tab system==*/
+.tabs {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 20px;
+}
+/*==the row of tab buttons==*/
+.tab-bar {
+  display: flex;
+  gap: 6px;
+  border-bottom: 1px solid gray;
+}
+/*==each tab button you can click.==*/
+.tab-bar label {
+  padding: 12px 14px;
+  border-radius: 12px 12px 0 0;
+  color: white;   /* White tabs */
+  cursor: pointer;
+}
+.tab-bar label:hover {
+  color: white;
+}
+/*==hidden radio buttons (control which tab is active)==*/
+input[name="tab"] {
+  display: none;
+}
+.tab-content {
+  display: none;
+  padding: 26px 0;
+}
+/*==Each tab is implemented using a hidden radio input (#tab-overview, #tab-design, etc.). When one is checked, it triggers styles for:==*/
+
+/* Show selected tab */
+#tab-overview:checked ~ .tabs .tab-bar label[for="tab-overview"],
+#tab-design:checked ~ .tabs .tab-bar label[for="tab-design"],
+#tab-performance:checked ~ .tabs .tab-bar label[for="tab-performance"],
+#tab-specs:checked ~ .tabs .tab-bar label[for="tab-specs"] {
+  color: white;
+  background: #111;
+  border: 1px solid gray;
+  border-bottom: none;
+}
+#tab-overview:checked ~ .tabs #panel-overview,
+#tab-design:checked ~ .tabs #panel-design,
+#tab-performance:checked ~ .tabs #panel-performance,
+#tab-specs:checked ~ .tabs #panel-specs {
+  display: block;
+}
+
+/* ===== Highlight Cards ===== */
+/*==grid to organize cards(overview)==*/
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}/*== overview imge==*/
+.card {
+  background: #111;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+}
+/*== sets the imge position and cards==*/
+.card-hero {
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+}
+/*==Arrainges the cards==*/
+/*==a grid of smaller boxes (stats like 0–100, power, top speed)==*/
+.metrics {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+/*==each stat box (white text inside a dark rectangle)==*/
+.metric {
+  background: #1a1a1a;
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 18px;
+  color: white;
+}
+.metric h3 {
+  font-size: 28px;
+  margin: 4px 0;
+}
+.metric p {
+  color: white;   /* White */
+  font-size: 0.95rem;
+}
+
+/* ===== Design Section ===== */
+/*== add side by side ===*/
+.design-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+/*==
+.design-card {
+  background: #111;
+  border: 1px solid gray;
+  border-radius: 10px;
+  overflow: hidden;
+  color: white;
+}
+.design-card img {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+.design-card .body {
+  padding: 16px;
+}
+
+/* ===== Performance Specs ===== */
+.perf-wrap {
+  display: grid;
+  gap: 16px;
+}
+.spec-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .spec-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.spec {
+  background: #1a1a1a;
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 18px;
+  color: white;
+}
+.spec .k {
+  color: white;  /* White */
+  font-size: 0.85rem;
+}
+.spec .v {
+  font-size: 22px;
+  margin-top: 6px;
+  color: white;  /* White */
+}
+
+/* ===== Specs Table ===== */
+.specs-table {
+  border: 1px solid gray;
+  border-radius: 10px;
+  overflow: hidden;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #111;
+  color: white;   /* White text */
+}
+th, td {
+  padding: 14px 16px;
+  border-bottom: 1px solid gray;
+  color: white;
+}
+th {
+  text-align: left;
+  font-weight: 500;
+  background: #222;
+  color: white;
+}
+tr:hover td {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 50px;
+  border-top: 1px solid gray;
+  background: black;
+}
+.foot {
+  max-width: 50%;
+  text-align: left;
+  margin: 0 auto;
+  padding: 28px 20px;
+  color: white;   /* White */
+}
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-media">
+      <img class="bg" src="bugatti chiron.jpg" alt="Bugatti Chiron"/>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-inner">
+              <a href="car.html">Home ></a>
+      <div class="title-wrap">
+        <h1 class="h-title">BUGATTI CHIRON</h1>
+        <p class="subtitle">THE ULTIMATE HYPERCAR</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <input type="radio" id="tab-overview"   name="tab" checked>
+  <input type="radio" id="tab-design"     name="tab">
+  <input type="radio" id="tab-performance"name="tab">
+  <input type="radio" id="tab-specs"      name="tab">
+
+  <section class="tabs">
+    <div class="tab-bar">
+      <label for="tab-overview">Overview</label>
+      <label for="tab-design">Design</label>
+      <label for="tab-performance">Performance</label>
+      <label for="tab-specs">Technical data</label>
+    </div>
+
+    <!-- Overview -->
+    <div id="panel-overview" class="tab-content">
+      <div class="highlight-grid">
+        <article class="card card-hero">
+          <img src="bugattif.jpg" alt="Bugatti Chiron Front">
+        </article>
+        <div class="metrics">
+          <div class="metric">
+            <p>0–100 km/h</p>
+            <h3>2.4 s</h3>
+            <p>Launch Control</p>
+          </div>
+          <div class="metric">
+            <p>Top speed</p>
+            <h3>420 km/h</h3>
+            <p>(Electronically limited)</p>
+          </div>
+          <div class="metric">
+            <p>Power</p>
+            <h3>1500 hp</h3>
+            <p>8.0L Quad-Turbo W16</p>
+          </div>
+          <div class="metric">
+            <p>Drive</p>
+            <h3>All-wheel drive</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div id="panel-design" class="tab-content">
+      <div class="design-grid">
+        <article class="design-card">
+          <img src="bugattiex.jpg" alt="Bugatti Exterior"/>
+          <div class="body">
+            <h4>Exterior</h4>
+            <p>The Chiron’s flowing lines and iconic C-bar define its aerodynamics. A sculpted body of carbon fiber and a distinctive horseshoe grille embody Bugatti DNA.</p>
+          </div>
+        </article>
+        <article class="design-card">
+          <img src="bugattiin.jpg" alt="Bugatti Interior"/>
+          <div class="body">
+            <h4>Interior</h4>
+            <p>Luxury meets performance inside. Hand-stitched leather, aluminum, and carbon fiber with minimalist yet futuristic design elevate the driving experience.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Performance -->
+    <div id="panel-performance" class="tab-content">
+      <div class="perf-wrap">
+        <div class="spec-row">
+          <div class="spec"><div class="k">Engine</div><div class="v">8.0L Quad-Turbocharged W16</div></div>
+          <div class="spec"><div class="k">Max output</div><div class="v">1500 hp (1103 kW)</div></div>
+          <div class="spec"><div class="k">Max torque</div><div class="v">1600 Nm</div></div>
+          <div class="spec"><div class="k">Transmission</div><div class="v">7-speed dual-clutch automatic</div></div>
+        </div>
+        <div class="spec-row">
+          <div class="spec"><div class="k">Drive</div><div class="v">All-wheel drive (AWD)</div></div>
+          <div class="spec"><div class="k">0–100 km/h</div><div class="v">2.4 s</div></div>
+          <div class="spec"><div class="k">Top speed</div><div class="v">420 km/h</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Specs -->
+    <div id="panel-specs" class="tab-content">
+      <div class="specs-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Item</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Dimensions</td><td>Length x Width x Height</td><td>4544 × 2038 × 1212 mm</td></tr>
+            <tr><td>Dimensions</td><td>Wheelbase</td><td>2711 mm</td></tr>
+            <tr><td>Weights</td><td>Curb weight</td><td>~1995 kg</td></tr>
+            <tr><td>Tyres</td><td>Front / Rear</td><td>Front: 285/30 R20<br>Rear: 355/25 R21</td></tr>
+            <tr><td>Fuel</td><td>Tank capacity</td><td>100 liters</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot">
+      <div>
+        <strong>Bugatti</strong>
+        <p>Engineering excellence and luxury redefined. The Chiron is the pinnacle of hypercar performance.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
